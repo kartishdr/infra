@@ -1,4 +1,3 @@
-
 # 1. Create ECR Repository
 resource "aws_ecr_repository" "app_repo" {
   name = var.ecr_repo_name
@@ -35,7 +34,7 @@ resource "aws_security_group" "ecs_sg" {
 
 resource "aws_iam_role" "ecs_task_role" {
   name = "ecsTaskExecutionRole"
-     assume_role_policy = jsonencode({
+ assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
       Effect = "Allow",
@@ -62,14 +61,11 @@ resource "aws_ecs_task_definition" "nginx" {
   cpu                      = "256"
   memory                   = "512"
   task_role_arn          = aws_iam_role.ecs_task_role.arn
-
-
-
-  container_definitions = jsonencode([
+container_definitions = jsonencode([
     {
       name  = "nginx"
       image = "nginx:latest"
-portMappings = [
+      portMappings = [
         {
           containerPort = 80
           protocol      = "tcp"
@@ -100,7 +96,7 @@ resource "aws_ecs_service" "nginx" {
 # 3. Create EC2 Instance (optional - for example/bastion)
 resource "aws_instance" "bastion" {
   ami           = var.ec2_ami
-  instance_type = var.ec2_instance_type
+ instance_type = var.ec2_instance_type
   subnet_id     = var.subnet_id
   key_name      = var.key_name
 
@@ -118,7 +114,7 @@ resource "aws_security_group" "alb_sg" {
   ingress {
     from_port   = 80
     to_port     = 80
-    protocol    = "tcp"
+ protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -156,4 +152,5 @@ resource "aws_lb_listener" "app_listener" {
     target_group_arn = aws_lb_target_group.app_tg.arn
   }
 }
-                                                                                                                                                                                              1,0-1         Top
+                              
+                                                                                                                                                         1,0-1         Top
