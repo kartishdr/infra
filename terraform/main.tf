@@ -9,7 +9,7 @@ resource "aws_ecs_cluster" "this" {
 
 
 module "compute" {
-  source = "../../../tf-modules/compute"
+  source = "../tf-modules/compute"
 
 
   ecs_cluster_id    = aws_ecs_cluster.this.id
