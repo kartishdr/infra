@@ -147,8 +147,8 @@ resource "aws_lb_listener" "app_listener" {
   port              = "80"
   protocol          = "HTTP"
 
-  default_action {
+    default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.app_tg.arn
   }
-}                                                                                                                                                                                       1,0-1         Top
+}                                                                                                                                                                                      1,0-1         Top
