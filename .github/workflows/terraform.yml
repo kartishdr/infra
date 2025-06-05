@@ -33,6 +33,6 @@ jobs:
         run: terraform -chdir=terraform plan
 
       # Uncomment below only if you're ready to auto-apply changes!
-      # - name: Terraform Apply
-      #   run: terraform -chdir=terraform apply -auto-approve
+       - name: Terraform Apply
+         run: terraform -chdir=terraform apply -auto-approve
 
