@@ -8,30 +8,31 @@ on:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: Terraform
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.6.0  # use your preferred version
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
 
-    - name: Terraform Init
-      run: terraform -chdir=terraform init
+      - name: Terraform Init
+        run: terraform -chdir=terraform init
 
-    - name: Terraform Format Check
-      run: terraform -chdir=terraform fmt -check
+      - name: Terraform Format Check
+        run: terraform -chdir=terraform fmt -check
 
-    - name: Terraform Validate
-      run: terraform -chdir=terraform validate
+      - name: Terraform Validate
+        run: terraform -chdir=terraform validate
 
-    - name: Terraform Plan
-      run: terraform -chdir=terraform plan
+      - name: Terraform Plan
+        run: terraform -chdir=terraform plan
 
-    
-     - name: Terraform Apply
-       run: terraform -chdir=terraform apply -auto-approve
+      # Uncomment below only if you're ready to auto-apply changes!
+      # - name: Terraform Apply
+      #   run: terraform -chdir=terraform apply -auto-approve
+
