@@ -10,3 +10,4 @@ resource "aws_ecs_cluster" "this" {
 
 module "compute" {
   source = "../tf-modules/compute"
+}
