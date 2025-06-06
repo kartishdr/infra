@@ -20,6 +20,6 @@ module "compute" {
   subnet_id         = "subnet-0cdd720102c04a689" 
   key_name          = "anu.pem"
   vpc_id            = "vpc-08ca0bc18af0f4dd3"
-  public_subnets  = ["10.0.0.0/28", "10.0.0.64/28"]
+  public_subnets  = ["subnet-0cdd720102c04a689", "subnet-0f48222fa480da235"]
 }
 
