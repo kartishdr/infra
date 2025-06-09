@@ -60,4 +60,3 @@ resource "aws_lb" "this" {
   load_balancer_type = "application"
   subnets            = var.public_subnets
 }
-                                                           58,1          89
