@@ -45,6 +45,7 @@ resource "aws_instance" "example" {
   tags = {
     Name = "example-ec2"
   }
+}
 resource "aws_ecr_repository" "this" {
   name = var.ecr_repo_name
 }
