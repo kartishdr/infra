@@ -16,7 +16,7 @@ data "aws_subnets" "public" {
 }
 
 module "compute" {
-  source            = "../../../tf-modules/compute"
+  source            = "../tf-modules/compute"
 
   vpc_id            = data.aws_vpc.existing.id
   public_subnets    = data.aws_subnets.public.ids
