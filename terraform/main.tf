@@ -1,5 +1,5 @@
 module "network" {
-  source              = "../tf-modules/network-module"
+  source              = "../tf-modules/network"
 }
 terraform {
   backend "s3" {
@@ -12,7 +12,7 @@ terraform {
 }
 
 module "storage" {
-  source              = "../tf-modules/storage-module"
+  source              = "../tf-modules/storage"
   depends_on          = [module.network]
    vpc_id               = "vpc-065e7588e40c7c2b3"
  security_group_id     = "sg-06bc8415c084c4a56"
@@ -20,7 +20,7 @@ db_subnet_group_name  = "my-db-subnet-group"
 }
 
 module "compute" {
-  source              = "../tf-modules/compute-module"
+  source              = "../tf-modules/compute"
   depends_on          = [module.storage]
   vpc_id            = data.aws_vpc.existing.id
   public_subnets    = data.aws_subnets.public.ids
