@@ -1,49 +1,16 @@
-name: Sequential Terraform Modules
-
-on:
-  push:
-    paths:
-      - 'terraform/**'
-    branches:
-      - main
-
 jobs:
-  network:
+  terraform:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ../terraform/network
-    steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-      - run: terraform init
-      - run: terraform validate
-      - run: terraform plan -out=tfplan
-      - run: terraform apply -auto-approve tfplan
+        working-directory: terraform
 
-  storage:
-    needs: network
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ../terraform/storage
     steps:
       - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-      - run: terraform init
-      - run: terraform validate
-      - run: terraform plan -out=tfplan
-      - run: terraform apply -auto-approve tfplan
 
-  compute:
-    needs: storage
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ../terraform/compute
-    steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
       - run: terraform init
       - run: terraform validate
       - run: terraform plan -out=tfplan
