@@ -1,3 +1,14 @@
+name: Terraform Deploy with Push Back
+
+on:
+  push:
+    paths:
+      - 'terraform/**'
+      - 'tf-modules/**'
+      - '.github/workflows/terraform.yml'
+    branches:
+      - main
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
