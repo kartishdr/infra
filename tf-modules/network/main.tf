@@ -1,4 +1,3 @@
-
 # Create VPC
 resource "aws_vpc" "main" {
   cidr_block = "10.1.0.0/16"
@@ -34,7 +33,7 @@ resource "aws_subnet" "private_subnet" {
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
   tags = { 
-Name = "main-igw"
+  Name = "main-igw"
   }
 }
 
@@ -68,7 +67,7 @@ resource "aws_route_table" "public_route_table" {
 # Associate the Public Subnet with the Public Route Table
 resource "aws_route_table_association" "public_subnet_association" {
   subnet_id      = aws_subnet.public_subnet.id
-route_table_id = aws_route_table.public_route_table.id
+  route_table_id = aws_route_table.public_route_table.id
 }
 
 # Create a Route Table for Private Subnet
@@ -90,4 +89,4 @@ resource "aws_route_table_association" "private_subnet_association" {
   subnet_id      = aws_subnet.private_subnet.id
   route_table_id = aws_route_table.private_route_table.id
 }
-                                                                          
+                                                                    
