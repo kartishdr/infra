@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "us-east-1"  # You can change to your preferred region
+}
+
 module "network" {
   source              = "../tf-modules/network"
 }
