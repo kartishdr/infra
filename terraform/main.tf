@@ -5,11 +5,6 @@ provider "aws" {
 module "network" {
   source              = "../tf-modules/network"
 }
-
-data "aws_vpc" "existing" {
-  default = true
-}
-
 data "aws_subnets" "in_vpc" {
   filter {
     name   = "vpc-id"
