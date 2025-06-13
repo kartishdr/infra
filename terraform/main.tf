@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "network" {
-  source              = "../tf-modules/network"
+  source              = "../../../tf-modules/network"
 }
 
 data "aws_vpc" "existing" {
