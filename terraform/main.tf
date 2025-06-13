@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "network" {
-  source              = "../../../tf-modules/network"
+  source              = "../tf-modules/network"
 }
 
 data "aws_vpc" "existing" {
@@ -17,7 +17,7 @@ data "aws_subnets" "in_vpc" {
   }
 }
 module "storage" {
-  source              = "../../../tf-modules/storage"
+  source              = "../tf-modules/storage"
   vpc_id              = data.aws_vpc.existing.id
  security_group_id    = "sg-06bc8415c084c4a56"
 db_subnet_group_name  = "my-db-subnet-group"
@@ -35,7 +35,7 @@ data "aws_subnets" "public" {
 }
 
 module "compute" {
-  source            = "../../../tf-modules/compute"
+  source            = "../tf-modules/compute"
 
   vpc_id            = data.aws_vpc.existing.id
   public_subnets    = data.aws_subnets.public.ids
