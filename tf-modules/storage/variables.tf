@@ -19,3 +19,8 @@ variable "security_group_id" {
 variable "db_subnet_group_name" {
   description = "DB subnet group (must be pre-created)"
 }
+
+variable "subnet_ids" {
+  description = "List of subnet IDs for RDS or other resources"
+  type        = list(string)
+}
