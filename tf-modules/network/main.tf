@@ -41,12 +41,18 @@ resource "aws_internet_gateway" "gw" {
 }
 
 # Create a NAT Gateway in the public subnet
+resource "aws_eip" "nat_eip" {
+  vpc = true
+}
+
 resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.nat_eip.id
   subnet_id     = aws_subnet.public_subnet.id
   tags = {
     Name = "main-nat-gateway"
   }
 }
+
 
 # Create a Route Table for Public Subnet
 resource "aws_route_table" "public_route_table" {
