@@ -24,8 +24,8 @@ jobs:
 
       - name: Apply Network
         run: |
-          terraform -chdir=terraform/network init
-          terraform -chdir=terraform/network apply -auto-approve
+          terraform -chdir=tf-modules/network init
+          terraform -chdir=tf-modules/network apply -auto-approve
 
   storage:
     runs-on: ubuntu-latest
@@ -39,8 +39,8 @@ jobs:
 
       - name: Apply Storage
         run: |
-          terraform -chdir=terraform/storage init
-          terraform -chdir=terraform/storage apply -auto-approve
+          terraform -chdir=tf-modules/storage init
+          terraform -chdir=tf-modules/storage apply -auto-approve
 
   compute:
     runs-on: ubuntu-latest
@@ -54,5 +54,5 @@ jobs:
 
       - name: Apply Compute
         run: |
-          terraform -chdir=terraform/compute init
-          terraform -chdir=terraform/compute apply -auto-approve
+          terraform -chdir=tf-modules/compute init
+          terraform -chdir=tf-modules/compute apply -auto-approve
