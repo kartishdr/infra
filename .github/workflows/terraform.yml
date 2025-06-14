@@ -12,39 +12,46 @@ on:
   
   workflow_dispatch:
 jobs:
-  terraform:
+  network:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Terraform
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
-      # --- Network module ---
-      - name: Init Network
-        run: terraform -chdir=tf-modules/network init
-
       - name: Apply Network
-        run: terraform -chdir=tf-modules/network apply -auto-approve
+        run: |
+          terraform -chdir=tf-modules/network init
+          terraform -chdir=tf-modules/network apply -auto-approve
 
-      # --- Storage module (depends on Network) ---
-      - name: Init Storage
-        run: terraform -chdir=tf-modules/storage init
+  storage:
+    runs-on: ubuntu-latest
+    needs: network 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
       - name: Apply Storage
-        run: terraform -chdir=tf-modules/storage apply -auto-approve
+        run: |
+          terraform -chdir=tf-modules/storage init
+          terraform -chdir=tf-modules/storage apply -auto-approve
 
-      # --- Compute module (depends on Storage) ---
-      - name: Init Compute
-        run: terraform -chdir=tf-modules/compute init
+  compute:
+    runs-on: ubuntu-latest
+    needs: storage  
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
       - name: Apply Compute
-        run: terraform -chdir=tf-modules/compute apply -auto-approve
+        run: |
+          terraform -chdir=tf-modules/compute init
+          terraform -chdir=tf-modules/compute apply -auto-approve
