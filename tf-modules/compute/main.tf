@@ -32,15 +32,6 @@ data "aws_ami" "amazon_linux" {
   owners = ["amazon"]
 }
 
-# 1. Internet Gateway
-resource "aws_internet_gateway" "gw" {
-  vpc_id = data.aws_vpc.selected.id
-
-  tags = {
-    Name = "demo-igw"
-  }
-}
-
 # 2. EC2 Instance
 resource "aws_instance" "example" {
   ami           = data.aws_ami.amazon_linux.id
