@@ -45,17 +45,17 @@ resource "aws_instance" "example" {
 
 # 3. ECR Repository
 resource "aws_ecr_repository" "this" {
-  name = "demo-ecr-repo"  # Replace with your preferred name
+  name = "my-ecr-repo"  # Replace with your preferred name
 }
 
 # 4. ECS Cluster
 resource "aws_ecs_cluster" "this" {
-  name = "demo-ecs-cluster"  # Replace as needed
+  name = "my-ecs-cluster"  # Replace as needed
 }
 
 # 5. Application Load Balancer
 resource "aws_lb" "this" {
-  name               = "demo-alb"  # Replace with desired name
+  name               = "my-alb"  # Replace with desired name
   internal           = false
   load_balancer_type = "application"
   security_groups    = [] # You can add SGs via data if needed
