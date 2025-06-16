@@ -10,10 +10,6 @@ variable "ecs_cluster_name" {
   type = string
 }
 
-variable "alb_name" {
-  type = string
-}
-
 variable "vpc_id" {
   type = string
 }
