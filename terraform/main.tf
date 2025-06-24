@@ -40,3 +40,8 @@ data "aws_subnets" "public" {
     values = [data.aws_vpc.existing.id]
   }
 }
+
+module "monitoring" {
+  source = "../tf-modules/monitoring"
+}
+
