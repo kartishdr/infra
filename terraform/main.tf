@@ -11,18 +11,6 @@ data "aws_subnets" "in_vpc" {
     values = [data.aws_vpc.existing.id]
   }
 }
-
-module "compute" {
-  source            = "../tf-modules/compute"
-
-  vpc_id            = data.aws_vpc.existing.id
-  public_subnets    = data.aws_subnets.public.ids
-
-  ec2_instance_type = "t2.micro"
-  ecr_repo_name     = "my-ecr-repo"
-  ecs_cluster_name  = "my-ecs-cluster"
-  alb_name          = "my-alb"
-}
 module "storage" {
   source              = "../tf-modules/storage"
   vpc_id              = data.aws_vpc.existing.id
@@ -40,6 +28,19 @@ data "aws_subnets" "public" {
     values = [data.aws_vpc.existing.id]
   }
 }
+
+module "compute" {
+  source            = "../tf-modules/compute"
+
+  vpc_id            = data.aws_vpc.existing.id
+  public_subnets    = data.aws_subnets.public.ids
+
+  ec2_instance_type = "t2.micro"
+  ecr_repo_name     = "my-ecr-repo"
+  ecs_cluster_name  = "my-ecs-cluster"
+  alb_name          = "my-alb"
+}
+
 
 module "monitoring" {
   source = "../tf-modules/monitoring"
