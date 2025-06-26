@@ -57,7 +57,7 @@ jobs:
           
   monitoring:
     runs-on: ubuntu-latest
-    needs: storage
+    needs: network
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -81,7 +81,7 @@ jobs:
           terraform -chdir=tf-modules/storage apply -auto-approve        
   compute:
     runs-on: ubuntu-latest
-    needs: storage
+    needs: network
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
