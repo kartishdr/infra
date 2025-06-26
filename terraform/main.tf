@@ -29,6 +29,10 @@ data "aws_subnets" "public" {
   }
 }
 
+module "monitoring" {
+  source = "../tf-modules/monitoring"
+}
+
 module "compute" {
   source            = "../tf-modules/compute"
 
@@ -40,11 +44,4 @@ module "compute" {
   ecs_cluster_name  = "my-ecs-cluster"
   alb_name          = "my-alb"
 }
-
-
-module "monitoring" {
-  source = "../tf-modules/monitoring"
-}
-
-
 
